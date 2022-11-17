@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
@@ -24,7 +25,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,
@@ -49,6 +51,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatToolbarModule,
     MatTableModule,
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

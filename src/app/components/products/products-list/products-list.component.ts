@@ -13,7 +13,7 @@ export class ProductsListComponent implements OnInit {
   products: Product[] = [];
   displayedColumns = [
     'name',
-    'description',
+    'provider',
     'unitPrice',
     'existence',
     'edit',
@@ -30,13 +30,13 @@ export class ProductsListComponent implements OnInit {
     existence: 0,
     date: new Date(),
     brand: '',
-    providerId: 0,
+    provider: 0
   };
 
   constructor(
     private productService: ProductService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -46,14 +46,11 @@ export class ProductsListComponent implements OnInit {
     this.products = await this.productService.getProducts();
   }
 
-  async getProduct(id: number) {
-    this.product = await this.productService.getProduct(id);
-  }
 
   openDialognew(): void {
     const dialogRef = this.dialog.open(ProductsFormComponent, {
       width: '400px',
-      data: {},
+      data: undefined,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -62,11 +59,10 @@ export class ProductsListComponent implements OnInit {
   }
 
   openDialog(id: number): void {
-    this.getProduct(id);
 
     const dialogRef = this.dialog.open(ProductsFormComponent, {
       width: '400px',
-      data: this.product,
+      data: id,
     });
 
     dialogRef.afterClosed().subscribe((result) => {

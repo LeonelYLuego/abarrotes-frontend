@@ -1,3 +1,4 @@
+import { Provider } from './provider.interface';
 export interface Product {
     id?: number;
     name: string;
@@ -9,5 +10,5 @@ export interface Product {
     existence: number;
     date: Date;
     brand: string;
-    providerId: number
+    provider: Provider | number;
 }
