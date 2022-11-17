@@ -1,0 +1,62 @@
+<mat-card>
+  <mat-card-title>Producto</mat-card-title>
+  <button
+    mat-raised-button
+    color="primary"
+    class="new"
+    (click)="openDialognew()"
+  >
+    Agregar
+  </button>
+  <mat-card-content>
+    <table mat-table [dataSource]="products" class="full-width">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <th mat-cell *matCellDef="let product">{{ product.name }}</th>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <th mat-cell *matCellDef="let product">{{ product.description }}</th>
+      </ng-container>
+      <ng-container matColumnDef="existence">
+        <th mat-header-cell *matHeaderCellDef>Existencia</th>
+        <th mat-cell *matCellDef="let product">
+          {{ product.existence }}
+        </th>
+      </ng-container>
+      <ng-container matColumnDef="unitPrice">
+        <th mat-header-cell *matHeaderCellDef>Precio por unidad</th>
+        <th mat-cell *matCellDef="let product">
+          {{ product.unitPrice | currency: "MX" }}
+        </th>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <th mat-cell *matCellDef="let product">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="openDialog(product.id)"
+          >
+            <mat-icon class="icons">edit</mat-icon>
+            Editar
+          </button>
+        </th>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+        <th mat-cell *matCellDef="let product">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="deleteProduct(product.id)"
+          >
+            <mat-icon class="icons">delete</mat-icon>Eliminar
+          </button>
+        </th>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

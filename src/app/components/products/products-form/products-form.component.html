@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>Producto {{ product.name }}</h1>
+<div mat-dialog-content>
+  <p>Nombre</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="text" matInput [(ngModel)]="product.name" />
+  </mat-form-field>
+  <p>Descripción</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="text" matInput [(ngModel)]="product.description" />
+  </mat-form-field>
+  <p>Presentación</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="text" matInput [(ngModel)]="product.presentation" />
+  </mat-form-field>
+  <p>Fecha de caducidad</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="date" matInput [(ngModel)]="product.expiration" />
+  </mat-form-field>
+  <p>Precio de proveedor</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="number" matInput [(ngModel)]="product.providerPrice" />
+  </mat-form-field>
+  <p>Precio unitario</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="number" matInput [(ngModel)]="product.unitPrice" />
+  </mat-form-field>
+  <p>Existencia</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="number" matInput [(ngModel)]="product.existence" />
+  </mat-form-field>
+  <p>Fecha</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="date" matInput [(ngModel)]="product.date" />
+  </mat-form-field>
+  <p>Marca</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="text" matInput [(ngModel)]="product.brand" />
+  </mat-form-field>
+  <p>ID del proveedor</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input type="number" matInput [(ngModel)]="product.providerId" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <div class="half"></div>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="product"
+    cdkFocusInitial
+    (click)="newProduct ? submitProduct() : updateProduct()"
+  >
+    Guardar
+  </button>
+</div>

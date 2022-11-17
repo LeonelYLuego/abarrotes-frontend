@@ -3,4 +3,14 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.full-width {
+    width: 100%;
+}
 
+.icons {
+    margin-right: 10px;
+}
+
+.half {
+    flex: 1 1 auto;
+}
