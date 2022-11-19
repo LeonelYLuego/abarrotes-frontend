@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
@@ -22,11 +23,10 @@ import { ProductsFormComponent } from './components/products/products-form/produ
 import { ProductsListComponent } from './components/products/products-list/products-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,11 +35,10 @@ import { HttpClientModule } from '@angular/common/http';
     ProductsFormComponent,
     ProductsListComponent,
     NavbarComponent,
-    HomeComponent,
-    AboutComponent,
-    ContactComponent
+    HomeComponent
   ],
   imports: [
+    MatListModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,

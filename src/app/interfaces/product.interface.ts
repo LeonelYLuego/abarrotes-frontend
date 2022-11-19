@@ -10,5 +10,4 @@ export interface Product {
     existence: number;
     date: Date;
     brand: string;
-    provider: Provider | number;
 }

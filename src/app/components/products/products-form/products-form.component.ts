@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from '../../../services/product.service';
 import { Provider } from '../../../interfaces/provider.interface';
-import { ProvidersService } from '../../../services/providers.service';
 
 @Component({
   selector: 'app-products-form',
@@ -21,8 +20,7 @@ export class ProductsFormComponent implements OnInit {
     unitPrice: 0,
     existence: 0,
     date: new Date(),
-    brand: '',
-    provider: 0
+    brand: ''
   };
 
   productFormControl = new FormGroup({
@@ -34,15 +32,13 @@ export class ProductsFormComponent implements OnInit {
     unitPrice: new FormControl<number | undefined>(undefined, [Validators.required]),
     existence: new FormControl<number | undefined>(undefined, [Validators.required]),
     date: new FormControl<Date | undefined>(undefined, [Validators.required]),
-    brand: new FormControl('', [Validators.required]),
-    provider: new FormControl<number | Provider>(0, [Validators.required]),
+    brand: new FormControl('', [Validators.required])
   })
   providers: Provider[] = [];
   newProduct: boolean = false;
 
   constructor(
     private productService: ProductService,
-    private providerService: ProvidersService,
     public dialogRef: MatDialogRef<ProductsFormComponent>,
     @Inject(MAT_DIALOG_DATA) public id: number
   ) { }
@@ -56,7 +52,6 @@ export class ProductsFormComponent implements OnInit {
       this.getProduct(this.id);
 
     }
-    this.getProviders();
   }
 
   async getProduct(id: number) {
@@ -69,15 +64,11 @@ export class ProductsFormComponent implements OnInit {
       expiration: this.product.expiration,
       name: this.product.name,
       presentation: this.product.presentation,
-      provider: this.product.provider,
       providerPrice: this.product.providerPrice,
       unitPrice: this.product.unitPrice
     });
   }
 
-  async getProviders() {
-    this.providers = await this.providerService.getProviders();
-  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -94,7 +85,6 @@ export class ProductsFormComponent implements OnInit {
         expiration: value.expiration!,
         name: value.name!,
         presentation: value.presentation!,
-        provider: value.provider!,
         providerPrice: value.providerPrice!,
         unitPrice: value.unitPrice!
       }).subscribe((res) => {
@@ -107,7 +97,6 @@ export class ProductsFormComponent implements OnInit {
   }
 
   updateProduct() {
-    const provider = this.product.provider as Provider;
 
     this.productService
       .updateProduct(this.id, {
@@ -118,7 +107,6 @@ export class ProductsFormComponent implements OnInit {
         expiration: this.productFormControl.controls.expiration.value!,
         name: this.productFormControl.controls.name.value!,
         presentation: this.productFormControl.controls.presentation.value!,
-        provider: provider.id,
         providerPrice: this.productFormControl.controls.providerPrice.value!,
         unitPrice: this.productFormControl.controls.unitPrice.value!
       })

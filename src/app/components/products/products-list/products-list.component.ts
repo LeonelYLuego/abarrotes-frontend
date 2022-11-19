@@ -3,6 +3,7 @@ import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from '../../../services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsFormComponent } from '../products-form/products-form.component';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-products-list',
@@ -13,7 +14,6 @@ export class ProductsListComponent implements OnInit {
   products: Product[] = [];
   displayedColumns = [
     'name',
-    'provider',
     'unitPrice',
     'existence',
     'edit',
@@ -29,9 +29,12 @@ export class ProductsListComponent implements OnInit {
     unitPrice: 0,
     existence: 0,
     date: new Date(),
-    brand: '',
-    provider: 0
+    brand: ''
   };
+
+  quantity = new FormControl<number>(0,[Validators.required, Validators.min(1)]);
+
+  admin = true;
 
   constructor(
     private productService: ProductService,
@@ -46,6 +49,9 @@ export class ProductsListComponent implements OnInit {
     this.products = await this.productService.getProducts();
   }
 
+  async getProduct(id: number) {
+    this.product = await this.productService.getProduct(id);
+  }
 
   openDialognew(): void {
     const dialogRef = this.dialog.open(ProductsFormComponent, {
@@ -76,5 +82,22 @@ export class ProductsListComponent implements OnInit {
       alert('Producto eliminado!');
       this.getProducts();
     });
+  }
+
+  async buyProduct(id: number) {
+    if (!this.quantity.valid) {
+      alert('Ingrese una cantidad valida!')
+      return
+    }
+
+    this.product = await this.productService.getProduct(id);
+    if (this.product.existence < this.quantity.getRawValue()!) {
+      alert('Inventario insuficiente')
+      this.quantity.setValue(0);
+      return
+    }
+    alert(this.quantity.getRawValue()+' '+this.product.name+' comprado')
+    this.quantity.setValue(0);
+   
   }
 }

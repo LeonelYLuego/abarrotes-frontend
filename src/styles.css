@@ -14,3 +14,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .half {
     flex: 1 1 auto;
 }
+
+.end {
+    float: right;
+}
+
+.cant {
+    width: 60px;
+}
+
