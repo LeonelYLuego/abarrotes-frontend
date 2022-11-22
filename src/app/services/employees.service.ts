@@ -1,25 +1,25 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product } from '../interfaces/product.interface';
 import { HttpResponse } from '../interfaces/http-response.interface';
+import { Employee } from '../interfaces/employee.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class EmployeeService {
   baseUrl: string = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
-  async getProducts(): Promise<Product[]> {
+  async getEmployees(): Promise<Employee[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
-    const data = await new Promise<Product[]>((resolve, reject) => {
+    const data = await new Promise<Employee[]>((resolve, reject) => {
       this.http
-        .get<HttpResponse<Product[]>>(`${this.baseUrl}/api/products`, {
+        .get<HttpResponse<Employee[]>>(`${this.baseUrl}/api/employees`, {
           headers: headers,
         })
         .subscribe({
@@ -33,14 +33,14 @@ export class ProductService {
     return data ?? [];
   }
 
-  async getProduct(id: number): Promise<Product> {
+  async getEmployee(id: number): Promise<Employee> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
-    const data = await new Promise<Product>((resolve, reject) => {
+    const data = await new Promise<Employee>((resolve, reject) => {
       this.http
-        .get<HttpResponse<Product>>(`${this.baseUrl}/api/products/${id}`, {
+        .get<HttpResponse<Employee>>(`${this.baseUrl}/api/employees/${id}`, {
           headers: headers,
         })
         .subscribe({
@@ -54,35 +54,37 @@ export class ProductService {
     return data ?? [];
   }
 
-  createProduct(product: Product): Observable<Product> {
+  createEmployee(employee: Employee): Observable<Employee> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
-    return this.http.post<Product>(`${this.baseUrl}/api/products`, product, {
+    return this.http.post<Employee>(`${this.baseUrl}/api/employees`, employee, {
       headers: headers,
     });
   }
 
-  deleteProduct(id: number): Observable<Product> {
+  deleteEmployee(id: number): Observable<Employee> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
-    return this.http.delete<Product>(`${this.baseUrl}/api/products/${id}`, {
+    return this.http.delete<Employee>(`${this.baseUrl}/api/employees/${id}`, {
       headers: headers,
     });
   }
 
-  updateProduct(id: number, product: Product): Observable<Product> {
+  updateEmployee(id: number, employee: Employee): Observable<Employee> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
-    return this.http.patch<Product>(
-      `${this.baseUrl}/api/products/${id}`,
-      product,
-      { headers: headers }
+    return this.http.patch<Employee>(
+      `${this.baseUrl}/api/employees/${id}`,
+      employee,
+      {
+        headers: headers,
+      }
     );
   }
 }

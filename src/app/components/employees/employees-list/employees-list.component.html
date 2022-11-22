@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title
-    >Clientes<button
+    >Empleados<button
       mat-raised-button
       color="primary"
       class="end"
@@ -11,37 +11,39 @@
   >
 
   <mat-card-content>
-    <table mat-table [dataSource]="clients" class="full-width">
+    <table mat-table [dataSource]="employees" class="full-width">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <th mat-cell *matCellDef="let client">{{ client.name }}</th>
+        <th mat-cell *matCellDef="let employee">{{ employee.name }}</th>
       </ng-container>
       <ng-container matColumnDef="firstLastName">
         <th mat-header-cell *matHeaderCellDef>Primer apellido</th>
-        <th mat-cell *matCellDef="let client">
-          {{ client.firstLastName }}
+        <th mat-cell *matCellDef="let employee">
+          {{ employee.firstLastName }}
         </th>
       </ng-container>
       <ng-container matColumnDef="secondLastName">
         <th mat-header-cell *matHeaderCellDef>Segundo apellido</th>
-        <th mat-cell *matCellDef="let client">
-          {{ client.secondLastName }}
+        <th mat-cell *matCellDef="let employee">
+          {{ employee.secondLastName }}
         </th>
       </ng-container>
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>Email</th>
-        <th mat-cell *matCellDef="let client">
-          {{ client.email }}
+      <ng-container matColumnDef="salary">
+        <th mat-header-cell *matHeaderCellDef>Salario</th>
+        <th mat-cell *matCellDef="let employee">
+          {{ employee.salary | currency: "MX" }}
+        </th>
+      </ng-container>
+      <ng-container matColumnDef="administrator">
+        <th mat-header-cell *matHeaderCellDef>Administrador</th>
+        <th mat-cell *matCellDef="let employee">
+          {{ employee.administrator }}
         </th>
       </ng-container>
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>Editar</th>
-        <th mat-cell *matCellDef="let client">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="openDialog(client.id)"
-          >
+        <th mat-cell *matCellDef="let employee">
+          <button mat-raised-button color="primary" (click)="openDialog(employee.id)">
             <mat-icon class="icons">edit</mat-icon>
             Editar
           </button>
@@ -49,12 +51,8 @@
       </ng-container>
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-        <th mat-cell *matCellDef="let client">
-          <button
-            mat-raised-button
-            color="warn"
-            (click)="deleteClient(client.id)"
-          >
+        <th mat-cell *matCellDef="let employee">
+          <button mat-raised-button color="warn" (click)="deleteEmployee(employee.id)">
             <mat-icon class="icons">delete</mat-icon>Eliminar
           </button>
         </th>

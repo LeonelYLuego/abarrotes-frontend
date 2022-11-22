@@ -18,10 +18,10 @@
           <th mat-header-cell *matHeaderCellDef>Nombre</th>
           <th mat-cell *matCellDef="let product">{{ product.name }}</th>
         </ng-container>
-        <ng-container matColumnDef="provider">
-          <th mat-header-cell *matHeaderCellDef>Proveedor</th>
+        <ng-container matColumnDef="brand">
+          <th mat-header-cell *matHeaderCellDef>Marca</th>
           <th mat-cell *matCellDef="let product">
-            {{ product.provider.name }}
+            {{ product.brand }}
           </th>
         </ng-container>
         <ng-container matColumnDef="existence">

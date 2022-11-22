@@ -26,6 +26,10 @@ import { HomeComponent } from './components/home/home.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
+import { EmployeesFormComponent } from './components/employees/employees-form/employees-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { HttpClientModule } from '@angular/common/http';
     ProductsFormComponent,
     ProductsListComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    EmployeesListComponent,
+    EmployeesFormComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     MatListModule,

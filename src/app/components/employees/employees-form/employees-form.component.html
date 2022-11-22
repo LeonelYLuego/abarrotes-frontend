@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Cliente {{ clientFormControl.controls.name.value }}</h1>
+<h1 mat-dialog-title>Empleado {{ employeeFormControl.controls.name.value }}</h1>
 <div mat-dialog-content>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Nombre</mat-label>
     <input
       type="text"
       matInput
-      [formControl]="clientFormControl.controls.name"
+      [formControl]="employeeFormControl.controls.name"
     />
   </mat-form-field>
   <p>Primer apellido</p>
@@ -14,7 +14,7 @@
     <input
       type="text"
       matInput
-      [formControl]="clientFormControl.controls.firstLastName"
+      [formControl]="employeeFormControl.controls.firstLastName"
     />
   </mat-form-field>
   <p>Segundo apellido</p>
@@ -23,7 +23,7 @@
     <input
       type="text"
       matInput
-      [formControl]="clientFormControl.controls.secondLastName"
+      [formControl]="employeeFormControl.controls.secondLastName"
     />
   </mat-form-field>
   <p>Email</p>
@@ -32,7 +32,7 @@
     <input
       type="email"
       matInput
-      [formControl]="clientFormControl.controls.email"
+      [formControl]="employeeFormControl.controls.email"
     />
   </mat-form-field>
   <p>Contraseña</p>
@@ -41,7 +41,7 @@
     <input
       type="password"
       matInput
-      [formControl]="clientFormControl.controls.password"
+      [formControl]="employeeFormControl.controls.password"
     />
   </mat-form-field>
   <p>Fecha de nacimiento</p>
@@ -50,7 +50,7 @@
     <input
       type="date"
       matInput
-      [formControl]="clientFormControl.controls.birthday"
+      [formControl]="employeeFormControl.controls.birthday"
     />
   </mat-form-field>
   <p>RFC</p>
@@ -59,27 +59,60 @@
     <input
       type="text"
       matInput
-      [formControl]="clientFormControl.controls.rfc"
+      [formControl]="employeeFormControl.controls.rfc"
     />
   </mat-form-field>
+  <p>Salary</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input
+      type="number"
+      matInput
+      [formControl]="employeeFormControl.controls.salary"
+    />
+  </mat-form-field>
+  <p>Estado civil</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="employeeFormControl.controls.maritalStatus"
+    />
+  </mat-form-field>
+  <p>Educación</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label></mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="employeeFormControl.controls.education"
+    />
+  </mat-form-field>
+  <p>Administrador</p>
+  <input
+    type="checkbox"
+    [formControl]="employeeFormControl.controls.administrator"
+  />
 </div>
 <div mat-dialog-actions>
   <div class="half"></div>
   <button mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
   <button
-    *ngIf="newClient"
+    *ngIf="newEmployee"
     mat-raised-button
     color="primary"
-    (click)="submitClient()"
+    (click)="submitEmployee()"
   >
     Agregar
   </button>
   <button
-    *ngIf="!newClient"
+    *ngIf="!newEmployee"
     mat-raised-button
     color="accent"
-    (click)="updateClient()"
+    (click)="updateEmployee()"
   >
     Actualizar
   </button>
+  <!-- <button mat-raised-button color="accent">Actualizar</button> -->
 </div>

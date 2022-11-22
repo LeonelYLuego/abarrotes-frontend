@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from '../../../services/product.service';
-import { Provider } from '../../../interfaces/provider.interface';
 
 @Component({
   selector: 'app-products-form',
@@ -20,37 +19,42 @@ export class ProductsFormComponent implements OnInit {
     unitPrice: 0,
     existence: 0,
     date: new Date(),
-    brand: ''
+    brand: '',
   };
 
   productFormControl = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     presentation: new FormControl('', [Validators.required]),
-    expiration: new FormControl<Date | undefined>(undefined, [Validators.required]),
-    providerPrice: new FormControl<number | undefined>(undefined, [Validators.required]),
-    unitPrice: new FormControl<number | undefined>(undefined, [Validators.required]),
-    existence: new FormControl<number | undefined>(undefined, [Validators.required]),
+    expiration: new FormControl<Date | undefined>(undefined, [
+      Validators.required,
+    ]),
+    providerPrice: new FormControl<number | undefined>(undefined, [
+      Validators.required,
+    ]),
+    unitPrice: new FormControl<number | undefined>(undefined, [
+      Validators.required,
+    ]),
+    existence: new FormControl<number | undefined>(undefined, [
+      Validators.required,
+    ]),
     date: new FormControl<Date | undefined>(undefined, [Validators.required]),
-    brand: new FormControl('', [Validators.required])
-  })
-  providers: Provider[] = [];
+    brand: new FormControl('', [Validators.required]),
+  });
+
   newProduct: boolean = false;
 
   constructor(
     private productService: ProductService,
     public dialogRef: MatDialogRef<ProductsFormComponent>,
     @Inject(MAT_DIALOG_DATA) public id: number
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     if (this.id == null) {
       this.newProduct = true;
-    }
-    else {
+    } else {
       this.getProduct(this.id);
-
     }
   }
 
@@ -65,10 +69,9 @@ export class ProductsFormComponent implements OnInit {
       name: this.product.name,
       presentation: this.product.presentation,
       providerPrice: this.product.providerPrice,
-      unitPrice: this.product.unitPrice
+      unitPrice: this.product.unitPrice,
     });
   }
-
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -77,27 +80,28 @@ export class ProductsFormComponent implements OnInit {
   submitProduct() {
     if (this.productFormControl.valid) {
       const value = this.productFormControl.value;
-      this.productService.createProduct({
-        brand: value.brand!,
-        date: value.date!,
-        description: value.description!,
-        existence: value.existence!,
-        expiration: value.expiration!,
-        name: value.name!,
-        presentation: value.presentation!,
-        providerPrice: value.providerPrice!,
-        unitPrice: value.unitPrice!
-      }).subscribe((res) => {
-        if (res) {
-          this.dialogRef.close();
-          alert('Producto creado!');
-        }
-      });
+      this.productService
+        .createProduct({
+          brand: value.brand!,
+          date: value.date!,
+          description: value.description!,
+          existence: value.existence!,
+          expiration: value.expiration!,
+          name: value.name!,
+          presentation: value.presentation!,
+          providerPrice: value.providerPrice!,
+          unitPrice: value.unitPrice!,
+        })
+        .subscribe((res) => {
+          if (res) {
+            this.dialogRef.close();
+            alert('Producto creado!');
+          }
+        });
     }
   }
 
   updateProduct() {
-
     this.productService
       .updateProduct(this.id, {
         brand: this.productFormControl.controls.brand.value!,
@@ -108,7 +112,7 @@ export class ProductsFormComponent implements OnInit {
         name: this.productFormControl.controls.name.value!,
         presentation: this.productFormControl.controls.presentation.value!,
         providerPrice: this.productFormControl.controls.providerPrice.value!,
-        unitPrice: this.productFormControl.controls.unitPrice.value!
+        unitPrice: this.productFormControl.controls.unitPrice.value!,
       })
       .subscribe((res) => {
         if (res) {

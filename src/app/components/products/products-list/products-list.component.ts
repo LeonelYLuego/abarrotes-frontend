@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from '../../../services/product.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,9 +11,12 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit {
+  admin: boolean = true;
+
   products: Product[] = [];
   displayedColumns = [
     'name',
+    'brand',
     'unitPrice',
     'existence',
     'edit',
@@ -33,8 +36,6 @@ export class ProductsListComponent implements OnInit {
   };
 
   quantity = new FormControl<number>(0,[Validators.required, Validators.min(1)]);
-
-  admin = true;
 
   constructor(
     private productService: ProductService,
