@@ -5,6 +5,8 @@ import { LoginResponse } from '../../interfaces/loginResponse.interface';
 import { EmployeeService } from 'src/app/services/employees.service';
 import { Employee } from 'src/app/interfaces/employee.interface';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +28,11 @@ export class LoginComponent implements OnInit {
     secondLastName: '',
   };
 
+  user: User = {
+    role: 'all',
+    user: null
+  }
+
   userFormControl = new FormGroup({
     email: new FormControl('luis@gmail.com', [Validators.required]),
     password: new FormControl('luis123', [Validators.required]),
@@ -34,11 +41,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     localStorage.setItem('token', '');
+  }
+
+  async getUser() {
+    const res = await this.authService.logged();
+    if (res){ this.user = res; alert('Bienvenido ' + this.user.user?.name + '!');}
   }
 
   async login() {
@@ -46,10 +59,11 @@ export class LoginComponent implements OnInit {
       email: this.userFormControl.controls.email.value!,
       password: this.userFormControl.controls.password.value!,
     });
-
+  
     if (res) {
       localStorage.setItem('token', res.token);
-      alert('Bienvenido ' + this.employee.name + '!');
+      this.authService.isLoggedIn = true;
+      this.getUser();
       this.router.navigateByUrl('home');
     }
   }

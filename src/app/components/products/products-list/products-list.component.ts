@@ -4,6 +4,8 @@ import { ProductService } from '../../../services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsFormComponent } from '../products-form/products-form.component';
 import { FormControl, Validators } from '@angular/forms';
+import { User } from 'src/app/interfaces/user.interface';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-products-list',
@@ -11,8 +13,13 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit {
-  admin: boolean = true;
-
+  
+  admin: boolean = false;
+  user: User = {
+    role: 'all',
+    user: null,
+  };
+  
   products: Product[] = [];
   displayedColumns = [
     'name',
@@ -39,11 +46,16 @@ export class ProductsListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.getProducts();
+    const res = await this.authService.logged();
+    if (res) {this.user = res; this.admin =true};
+    console.log(this.user);
+    console.log(this.admin);
   }
 
   async getProducts() {
