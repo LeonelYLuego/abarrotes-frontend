@@ -30,12 +30,12 @@ export class LoginComponent implements OnInit {
 
   user: User = {
     role: 'all',
-    user: null
-  }
+    user: null,
+  };
 
   userFormControl = new FormGroup({
-    email: new FormControl('luis@gmail.com', [Validators.required]),
-    password: new FormControl('luis123', [Validators.required]),
+    email: new FormControl('caro@gmail.com', [Validators.required]),
+    password: new FormControl('caro123', [Validators.required]),
   });
 
   constructor(
@@ -47,11 +47,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.setItem('token', '');
+    this.authService.isLoggedIn = false;
   }
 
   async getUser() {
     const res = await this.authService.logged();
-    if (res){ this.user = res; alert('Bienvenido ' + this.user.user?.name + '!');}
+    if (res) {
+      this.user = res;
+      alert('Bienvenido ' + this.user.user?.name + '!');
+    }
   }
 
   async login() {
@@ -59,7 +63,7 @@ export class LoginComponent implements OnInit {
       email: this.userFormControl.controls.email.value!,
       password: this.userFormControl.controls.password.value!,
     });
-  
+
     if (res) {
       localStorage.setItem('token', res.token);
       this.authService.isLoggedIn = true;

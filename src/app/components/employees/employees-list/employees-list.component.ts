@@ -7,10 +7,9 @@ import { EmployeesFormComponent } from '../employees-form/employees-form.compone
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
-  styleUrls: ['./employees-list.component.css']
+  styleUrls: ['./employees-list.component.css'],
 })
 export class EmployeesListComponent implements OnInit {
-
   employees: Employee[] = [];
   displayedColumns = [
     'name',
@@ -22,7 +21,10 @@ export class EmployeesListComponent implements OnInit {
     'delete',
   ];
 
-  constructor(private employeeService: EmployeeService, public dialog: MatDialog) { }
+  constructor(
+    private employeeService: EmployeeService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getEmployees();
@@ -44,7 +46,6 @@ export class EmployeesListComponent implements OnInit {
   }
 
   openDialog(id: number): void {
-
     const dialogRef = this.dialog.open(EmployeesFormComponent, {
       width: '400px',
       data: id,
@@ -61,5 +62,4 @@ export class EmployeesListComponent implements OnInit {
       this.getEmployees();
     });
   }
-
 }

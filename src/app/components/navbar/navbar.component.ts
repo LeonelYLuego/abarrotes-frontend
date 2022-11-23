@@ -8,17 +8,17 @@ import { User } from '../../interfaces/user.interface';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  
   constructor(private authService: AuthService) {}
   user: User = {
     role: 'all',
     user: null,
   };
-  
 
   async ngOnInit() {
-    
     const res = await this.authService.logged();
-    if (res) {this.user = res; console.log(this.user)};
+    if (res) {
+      this.user = res;
+      console.log(this.user);
+    }
   }
 }

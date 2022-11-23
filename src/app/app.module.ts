@@ -30,6 +30,8 @@ import { EmployeesListComponent } from './components/employees/employees-list/em
 import { EmployeesFormComponent } from './components/employees/employees-form/employees-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ShoppingCartComponent } from './components/orders/shopping-cart/shopping-cart.component';
+import { OrderFormComponent } from './components/orders/order-form/order-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { RegisterComponent } from './components/register/register.component';
     EmployeesListComponent,
     EmployeesFormComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ShoppingCartComponent,
+    OrderFormComponent
   ],
   imports: [
     MatListModule,
